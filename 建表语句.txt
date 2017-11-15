@@ -1,0 +1,64 @@
+PUT /my_product
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        
+        "ik_pinyin_analyzer":{
+            "type":"custom",
+            "tokenizer":"ik_smart",
+            "filter":["my_pinyin","word_delimiter"]
+        }
+      },
+      "filter":{
+          "my_pinyin":{
+            "type":"pinyin",
+            "first_letter":"prefix",
+            "padding_char":" "
+          }
+        }
+    }
+  },
+  "mappings": {
+    "product":{
+      "properties": {
+        "title":{
+          "type": "text",
+          "fields": {
+                    "pinyin": {
+                        "type": "text",
+                        "store": "no",
+                        "term_vector": "with_positions_offsets",
+                        "analyzer": "ik_pinyin_analyzer",
+                        "boost": 10
+                    }
+                }
+        },
+        "first_kind":{
+          "type": "keyword",
+          "fields": {
+                    "pinyin": {
+                        "type": "text",
+                        "store": "no",
+                        "term_vector": "with_positions_offsets",
+                        "analyzer": "ik_pinyin_analyzer",
+                        "boost": 10
+                    }
+                }
+        },
+        "second_kind":{
+          "type": "keyword",
+          "fields": {
+                    "pinyin": {
+                        "type": "text",
+                        "store": "no",
+                        "term_vector": "with_positions_offsets",
+                        "analyzer": "ik_pinyin_analyzer",
+                        "boost": 10
+                    }
+                }
+        }
+      }
+    }
+  }
+}

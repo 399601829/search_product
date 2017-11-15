@@ -1,0 +1,9 @@
+GET /my_product/product/_search
+{
+  "query": {
+    "multi_match": {
+      "fields": ["title","first_kind","second_kind","title.pinyin","first_kind.pinyin","second_kind.pinyin"],
+      "query": "yecailei qiguoguo Тувс"
+    }
+  }
+}
